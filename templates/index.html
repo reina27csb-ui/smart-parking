@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Parking System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .slot {
+            width: 140px;
+            height: 140px;
+            margin: 10px;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .free {
+            background-color: green;
+        }
+
+        .occupied {
+            background-color: red;
+        }
+
+        a {
+            margin-top: 8px;
+            text-decoration: none;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        a:hover {
+            background: black;
+            color: white;
+        }
+
+        .vehicle {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🚗 Smart Parking System</h1>
+
+<div class="container">
+    {% for i in range(slots|length) %}
+
+        <div class="slot {{ 'occupied' if slots[i] else 'free' }}">
+
+            Slot {{ i }}
+
+            {% if slots[i] %}
+                <div class="vehicle">
+                    🚗 {{ slots[i] }}
+                </div>
+                <a href="/release/{{ i }}">Release</a>
+            {% else %}
+                <a href="/book/{{ i }}">Book</a>
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+</div>
+
+</body>
+</html>
